@@ -15,10 +15,28 @@
     <div class="container">
         <!-- Left Side: Option Price & Greeks -->
         <div class="info-panel">
-            <label>Asset Price (S): <input type="range" id="S" min="50" max="150" value="100"></label>
-            <label>Strike Price (K): <input type="range" id="K" min="50" max="150" value="100"></label>
-            <label>Volatility (σ): <input type="range" id="sigma" min="0.1" max="1" step="0.01" value="0.2"></label>
-            <label>Time to Expiry (T): <input type="range" id="T" min="0.1" max="2" step="0.1" value="1"></label>
+            <!-- Sliders with displayed values -->
+            <div class="sliders">
+                <label>Asset Price (S): 
+                    <input type="range" id="S" min="50" max="150" value="100" oninput="updateSliderValue('S')">
+                    <span id="S_value">100</span>
+                </label>
+
+                <label>Strike Price (K): 
+                    <input type="range" id="K" min="50" max="150" value="100" oninput="updateSliderValue('K')">
+                    <span id="K_value">100</span>
+                </label>
+
+                <label>Volatility (σ): 
+                    <input type="range" id="sigma" min="0.1" max="1" step="0.01" value="0.2" oninput="updateSliderValue('sigma')">
+                    <span id="sigma_value">0.2</span>
+                </label>
+
+                <label>Time to Expiry (T): 
+                    <input type="range" id="T" min="0.1" max="2" step="0.1" value="1" oninput="updateSliderValue('T')">
+                    <span id="T_value">1</span>
+                </label>
+            </div>
 
             <button onclick="updateGraph()">Update Graph</button>
 

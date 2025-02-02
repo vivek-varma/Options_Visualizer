@@ -17,8 +17,9 @@ body {
 }
 
 #graph3D {
-    width: 65%; /* Increase size of 3D graph */
-    height: 500px; /* Make it slightly bigger */
+    width: 70%;  /* Increased width */
+    height: 600px; /* Increased height to prevent cutoff */
+    padding: 10px; /* Add padding to avoid overlap */
 }
 
 /* Styling for price and greeks */
@@ -34,4 +35,28 @@ body {
     border-radius: 8px;
     text-align: left;
     margin-top: 10px;
+}
+
+.sliders {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.sliders label {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
+    width: 45%;
+}
+
+.sliders input {
+    margin-left: 10px;
+    flex: 1;
+}
+
+.sliders span {
+    font-weight: bold;
+    margin-left: 10px;
 }

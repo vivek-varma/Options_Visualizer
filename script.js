@@ -70,6 +70,7 @@ async function update3DGraph() {
 
     let layout = {
         title: "Option Pricing Surface",
+        margin: { l: 10, r: 10, t: 50, b: 50 }, // Adjust margin to prevent cutoff
         scene: {
             xaxis: { title: "Strike Price (K)" },
             yaxis: { title: "Asset Price (S)" },
@@ -77,7 +78,6 @@ async function update3DGraph() {
         }
     };
 
-    // Ensure the `graph3D` div exists before updating
     let graphDiv = document.getElementById("graph3D");
     if (graphDiv) {
         graphDiv.innerHTML = ""; // Clear previous graph
@@ -104,4 +104,11 @@ async function updateGreeks(S, K, T, sigma) {
     } catch (error) {
         console.error("Error fetching Greeks:", error);
     }
+}
+
+// Function to update slider value dynamically
+function updateSliderValue(sliderId) {
+    let slider = document.getElementById(sliderId);
+    let valueDisplay = document.getElementById(sliderId + "_value");
+    valueDisplay.innerText = slider.value;
 }
