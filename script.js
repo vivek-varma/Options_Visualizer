@@ -14,7 +14,7 @@ async function updateGraph() {
 
         d3.select("#graph").html(""); // Clear old graph
 
-        let width = 500, height = 400;
+        let width = 500, height = 100;
         let svg = d3.select("#graph")
                     .append("svg")
                     .attr("width", width)
@@ -36,8 +36,6 @@ async function updateGraph() {
 }
 
 async function update3DGraph() {
-    let S = document.getElementById("S").value;
-    let K = document.getElementById("K").value;
     let sigma = document.getElementById("sigma").value;
     let T = document.getElementById("T").value;
 
@@ -47,8 +45,14 @@ async function update3DGraph() {
 
     for (let s = 50; s <= 150; s += 5) {
         S_values.push(s);
+    }
+    for (let k = 50; k <= 150; k += 5) {
+        K_values.push(k);
+    }
+
+    for (let s of S_values) {
         let row = [];
-        for (let k = 50; k <= 150; k += 5) {
+        for (let k of K_values) {
             let response = await fetch(`https://options-visualizer.onrender.com/option_price?S=${s}&K=${k}&T=${T}&r=0.05&sigma=${sigma}`);
             let data = await response.json();
             row.push(data.option_price);
@@ -72,5 +76,12 @@ async function update3DGraph() {
         }
     };
 
-    Plotly.newPlot('graph3D', [trace], layout);
+    // Ensure the `graph3D` div exists before updating
+    let graphDiv = document.getElementById("graph3D");
+    if (graphDiv) {
+        graphDiv.innerHTML = ""; // Clear previous graph
+        Plotly.newPlot(graphDiv, [trace], layout);
+    } else {
+        console.error("graph3D container not found.");
+    }
 }
