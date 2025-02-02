@@ -2,10 +2,36 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
 }
-label {
-    display: block;
-    margin: 10px;
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Spread content evenly */
+    align-items: flex-start;
+    padding: 20px;
 }
-svg {
-    border: 1px solid black;
+
+.info-panel {
+    width: 30%;
+    text-align: left;
+    padding-right: 20px;
+}
+
+#graph3D {
+    width: 65%; /* Increase size of 3D graph */
+    height: 500px; /* Make it slightly bigger */
+}
+
+/* Styling for price and greeks */
+.price-box {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.greeks-box {
+    background: #f7f7f7;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: left;
+    margin-top: 10px;
 }

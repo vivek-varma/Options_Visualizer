@@ -28,6 +28,7 @@ async function updateGraph() {
            .text(`Option Price: $${optionPrice.toFixed(2)}`);
 
         // Update 3D Graph dynamically
+        updateGreeks(S, K, T, sigma);
         update3DGraph();
     } catch (error) {
         console.error("Error fetching API:", error);
@@ -83,5 +84,24 @@ async function update3DGraph() {
         Plotly.newPlot(graphDiv, [trace], layout);
     } else {
         console.error("graph3D container not found.");
+    }
+}
+
+async function updateGreeks(S, K, T, sigma) {
+    try {
+        let response = await fetch(`https://options-visualizer.onrender.com/option_greeks?S=${S}&K=${K}&T=${T}&r=0.05&sigma=${sigma}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        let data = await response.json();
+
+        // Update the Greeks in the UI
+        document.getElementById("delta").innerText = data.delta.toFixed(4);
+        document.getElementById("gamma").innerText = data.gamma.toFixed(4);
+        document.getElementById("vega").innerText = data.vega.toFixed(4);
+        document.getElementById("theta").innerText = data.theta.toFixed(4);
+        document.getElementById("rho").innerText = data.rho.toFixed(4);
+    } catch (error) {
+        console.error("Error fetching Greeks:", error);
     }
 }
