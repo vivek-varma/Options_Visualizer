@@ -5,7 +5,7 @@ async function updateGraph() {
     let T = document.getElementById("T").value;
 
     try {
-        let response = await fetch(`https://options-visualize.onrender.com/option_price?S=${S}&K=${K}&T=${T}&r=0.05&sigma=${sigma}`);
+        let response = await fetch(`https://options-visualizer.onrender.com/option_price?S=${S}&K=${K}&T=${T}&r=0.05&sigma=${sigma}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -49,7 +49,7 @@ async function update3DGraph() {
         S_values.push(s);
         let row = [];
         for (let k = 50; k <= 150; k += 5) {
-            let response = await fetch(`https://options-visualize.onrender.com/option_price?S=${s}&K=${k}&T=${T}&r=0.05&sigma=${sigma}`);
+            let response = await fetch(`https://options-visualizer.onrender.com/option_price?S=${s}&K=${k}&T=${T}&r=0.05&sigma=${sigma}`);
             let data = await response.json();
             row.push(data.option_price);
         }
