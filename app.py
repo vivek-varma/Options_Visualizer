@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 import numpy as np
 import scipy.stats as si
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Black-Scholes Option Pricing Model
 def black_scholes(S, K, T, r, sigma, option_type="call"):
@@ -27,7 +29,7 @@ def get_option_price():
     option_type = request.args.get('type', 'call')
 
     price = black_scholes(S, K, T, r, sigma, option_type)
-    
+
     return jsonify({"option_price": price})
 
 if __name__ == '__main__':
