@@ -19,20 +19,27 @@ def black_scholes(S, K, T, r, sigma, option_type="call"):
 
     return price
 
+# API Route with Forced CORS Headers
 @app.route('/option_price', methods=['GET'])
 def get_option_price():
-    S = float(request.args.get('S'))
-    K = float(request.args.get('K'))
-    T = float(request.args.get('T'))
-    r = float(request.args.get('r'))
-    sigma = float(request.args.get('sigma'))
-    option_type = request.args.get('type', 'call')
+    try:
+        S = float(request.args.get('S'))
+        K = float(request.args.get('K'))
+        T = float(request.args.get('T'))
+        r = float(request.args.get('r'))
+        sigma = float(request.args.get('sigma'))
+        option_type = request.args.get('type', 'call')
 
-    price = black_scholes(S, K, T, r, sigma, option_type)
+        price = black_scholes(S, K, T, r, sigma, option_type)
 
-    response = jsonify({"option_price": price})
-    response.headers.add("Access-Control-Allow-Origin", "*")  # Fix CORS issue
-    return response
+        # Explicitly add CORS headers
+        response = jsonify({"option_price": price})
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add("Access-Control-Allow-Methods", "GET, OPTIONS")
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+        return response
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400  # Handle errors gracefully
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Bind to Render-assigned port
