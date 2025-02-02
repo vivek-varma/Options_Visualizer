@@ -1,0 +1,11 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+label {
+    display: block;
+    margin: 10px;
+}
+svg {
+    border: 1px solid black;
+}
